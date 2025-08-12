@@ -8,6 +8,8 @@ import com.hexaware.hotbyte.enums.OrderStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,10 +18,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "orders")
-public class Order {
+public class OrderInfo {
 	
 	@Id
-	private int order_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long order_id;
 	private double total_amount;
 	private LocalDate order_time;
 	
@@ -29,7 +32,7 @@ public class Order {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
+	private UserInfo user;
 	
 	@ManyToOne
 	@JoinColumn(name="restaurant_id")
@@ -46,10 +49,10 @@ public class Order {
 	private List<OrderItem>orderItem;
 
 	
-	public Order() {}
+	public OrderInfo() {}
 
 
-	public Order(int order_id, double total_amount, LocalDate order_time, OrderStatus status, User user,
+	public OrderInfo(long order_id, double total_amount, LocalDate order_time, OrderStatus status, UserInfo user,
 			Restaurant restaurant, Address shippingAddress, List<OrderItem> orderItem) {
 		super();
 		this.order_id = order_id;
@@ -65,14 +68,14 @@ public class Order {
 
 
 
-	public int getOrder_id() {
+	public long getOrder_id() {
 		return order_id;
 	}
 
 
 
 
-	public void setOrder_id(int order_id) {
+	public void setOrder_id(long order_id) {
 		this.order_id = order_id;
 	}
 
@@ -121,14 +124,14 @@ public class Order {
 
 
 
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
 
 
 
 
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 

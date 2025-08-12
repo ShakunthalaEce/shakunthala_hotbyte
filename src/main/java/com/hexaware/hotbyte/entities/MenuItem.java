@@ -3,6 +3,8 @@ package com.hexaware.hotbyte.entities;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -12,7 +14,8 @@ import jakarta.persistence.OneToMany;
 public class MenuItem {
 	
 	@Id
-	private int menu_item_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long menu_item_id;
 	
 	private String name;
 	private String cuisine_type;//veg,non-veg,both
@@ -36,7 +39,7 @@ public class MenuItem {
 	
 	public MenuItem() {}
 
-	public MenuItem(int menu_item_id, String name, String cuisine_type, String description, String image_url,
+	public MenuItem(long menu_item_id, String name, String cuisine_type, String description, String image_url,
 			Double price, String preparation_time, String is_available, Restaurant restaurant, Category category,
 			List<OrderItem> orderItem) {
 		super();
@@ -53,11 +56,11 @@ public class MenuItem {
 		this.orderItem = orderItem;
 	}
 
-	public int getMenu_item_id() {
+	public long getMenu_item_id() {
 		return menu_item_id;
 	}
 
-	public void setMenu_item_id(int menu_item_id) {
+	public void setMenu_item_id(long menu_item_id) {
 		this.menu_item_id = menu_item_id;
 	}
 

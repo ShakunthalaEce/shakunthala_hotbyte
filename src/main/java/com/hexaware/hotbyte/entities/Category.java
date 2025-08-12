@@ -3,6 +3,8 @@ package com.hexaware.hotbyte.entities;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
@@ -11,7 +13,8 @@ import jakarta.persistence.OneToMany;
 public class Category {
 	
 	@Id
-	private int category_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long category_id;
 	private String name;
 	private String description;
 	
@@ -24,7 +27,7 @@ public class Category {
 	
 	public Category() {}
 
-	public Category(int category_id, String name, String description, List<MenuItem> menuItems,
+	public Category(long category_id, String name, String description, List<MenuItem> menuItems,
 			List<Restaurant> restaurants) {
 		super();
 		this.category_id = category_id;
@@ -34,12 +37,12 @@ public class Category {
 		this.restaurants = restaurants;
 	}
 
-	public int getCategory_id() {
+	public long getCategory_id() {
 		return category_id;
 	}
 
-	public void setCategory_id(int category_id) {
-		this.category_id = category_id;
+	public void setCategory_id(long l) {
+		this.category_id = l;
 	}
 
 	public String getName() {

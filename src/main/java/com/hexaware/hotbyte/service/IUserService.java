@@ -2,11 +2,17 @@ package com.hexaware.hotbyte.service;
 
 import java.util.List;
 
-import com.hexaware.hotbyte.entities.User;
+import com.hexaware.hotbyte.dto.UserInfoDto;
+import com.hexaware.hotbyte.entities.UserInfo;
 
 public interface IUserService {
-	public int addUser(User user);
-	public int updateUser(User user);
-	public List<User>getUsers();
-	public User getUserById(int id);
+	UserInfo registerUser(UserInfoDto userInfoDto);
+
+	UserInfo updateUser(Long userId, UserInfoDto userInfoDto);
+
+	void deleteUser(Long userId);
+
+	UserInfo getUserById(Long userId);
+
+	List<UserInfo> getAllUsers();
 }

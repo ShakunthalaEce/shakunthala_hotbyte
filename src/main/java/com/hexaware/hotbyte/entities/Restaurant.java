@@ -5,6 +5,8 @@ package com.hexaware.hotbyte.entities;
 import java.util.List;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
@@ -16,7 +18,8 @@ import jakarta.persistence.OneToOne;
 public class Restaurant {
 	
 	@Id
-	private int restaurant_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long restaurant_id;
 	private String restaurant_name;
 	private String phone_number;
 	private String city;
@@ -25,14 +28,14 @@ public class Restaurant {
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
-	private User user;
+	private UserInfo user;
 	
 	
 	@OneToMany(mappedBy="restaurant")
 	private List<MenuItem> menuItems;
 	
 	@OneToMany(mappedBy="restaurant")
-	private List<Order>orders;
+	private List<OrderInfo>orders;
 	
 	 @ManyToMany
 	 @JoinTable(
@@ -44,8 +47,8 @@ public class Restaurant {
 	 
 	 public Restaurant() {}
 
-	 public Restaurant(int restaurant_id, String restaurant_name, String phone_number, String city, String state,
-			String pincode, User user, List<MenuItem> menuItems, List<Order> orders, List<Category> categories) {
+	 public Restaurant(long restaurant_id, String restaurant_name, String phone_number, String city, String state,
+			String pincode, UserInfo user, List<MenuItem> menuItems, List<OrderInfo> orders, List<Category> categories) {
 		super();
 		this.restaurant_id = restaurant_id;
 		this.restaurant_name = restaurant_name;
@@ -59,11 +62,11 @@ public class Restaurant {
 		this.categories = categories;
 	}
 
-	 public int getRestaurant_id() {
+	 public long getRestaurant_id() {
 		 return restaurant_id;
 	 }
 
-	 public void setRestaurant_id(int restaurant_id) {
+	 public void setRestaurant_id(long restaurant_id) {
 		 this.restaurant_id = restaurant_id;
 	 }
 
@@ -107,11 +110,11 @@ public class Restaurant {
 		 this.pincode = pincode;
 	 }
 
-	 public User getUser() {
+	 public UserInfo getUser() {
 		 return user;
 	 }
 
-	 public void setUser(User user) {
+	 public void setUser(UserInfo user) {
 		 this.user = user;
 	 }
 
@@ -123,11 +126,11 @@ public class Restaurant {
 		 this.menuItems = menuItems;
 	 }
 
-	 public List<Order> getOrders() {
+	 public List<OrderInfo> getOrders() {
 		 return orders;
 	 }
 
-	 public void setOrders(List<Order> orders) {
+	 public void setOrders(List<OrderInfo> orders) {
 		 this.orders = orders;
 	 }
 

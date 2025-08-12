@@ -7,6 +7,8 @@ import com.hexaware.hotbyte.enums.UserRole;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
@@ -14,10 +16,11 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="users")
-public class User {
+public class UserInfo {
 	
 	@Id
-	private int user_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long user_id;
 	
 	private String name;
 	private String email;
@@ -37,12 +40,12 @@ public class User {
 	private Restaurant restaurant;
 	
 	@OneToMany(mappedBy="user")
-	private List<Order> orders;
+	private List<OrderInfo> orders;
 	
-	public User() {}
+	public UserInfo() {}
 
-	public User(int user_id, String name, String email, String password, String phone_number, UserRole role,
-			List<Address> addresses, Cart cart, Restaurant restaurant, List<Order> orders) {
+	public UserInfo(long user_id, String name, String email, String password, String phone_number, UserRole role,
+			List<Address> addresses, Cart cart, Restaurant restaurant, List<OrderInfo> orders) {
 		super();
 		this.user_id = user_id;
 		this.name = name;
@@ -56,11 +59,11 @@ public class User {
 		this.orders = orders;
 	}
 
-	public int getUser_id() {
+	public long getUser_id() {
 		return user_id;
 	}
 
-	public void setUser_id(int user_id) {
+	public void setUser_id(long user_id) {
 		this.user_id = user_id;
 	}
 
@@ -128,11 +131,11 @@ public class User {
 		this.restaurant = restaurant;
 	}
 
-	public List<Order> getOrders() {
+	public List<OrderInfo> getOrders() {
 		return orders;
 	}
 
-	public void setOrders(List<Order> orders) {
+	public void setOrders(List<OrderInfo> orders) {
 		this.orders = orders;
 	}
 

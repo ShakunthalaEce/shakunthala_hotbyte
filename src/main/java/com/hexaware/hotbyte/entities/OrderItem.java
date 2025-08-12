@@ -1,6 +1,8 @@
 package com.hexaware.hotbyte.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -9,14 +11,15 @@ import jakarta.persistence.ManyToOne;
 public class OrderItem {
 	
 	@Id
-	private int order_item_id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long order_item_id;
 	
 	private int quantity;
 	private double price;
 	
 	@ManyToOne
 	@JoinColumn(name="order_id")
-	private Order order;
+	private OrderInfo order;
 	
 	@ManyToOne
 	@JoinColumn(name="menu_item_id")
@@ -24,7 +27,7 @@ public class OrderItem {
 	
 	public OrderItem() {}
 
-	public OrderItem(int order_item_id, int quantity, double price, Order order, MenuItem menuItem) {
+	public OrderItem(long order_item_id, int quantity, double price, OrderInfo order, MenuItem menuItem) {
 		super();
 		this.order_item_id = order_item_id;
 		this.quantity = quantity;
@@ -33,11 +36,11 @@ public class OrderItem {
 		this.menuItem = menuItem;
 	}
 
-	public int getOrder_item_id() {
+	public long getOrder_item_id() {
 		return order_item_id;
 	}
 
-	public void setOrder_item_id(int order_item_id) {
+	public void setOrder_item_id(long order_item_id) {
 		this.order_item_id = order_item_id;
 	}
 
@@ -57,11 +60,11 @@ public class OrderItem {
 		this.price = price;
 	}
 
-	public Order getOrder() {
+	public OrderInfo getOrder() {
 		return order;
 	}
 
-	public void setOrder(Order order) {
+	public void setOrder(OrderInfo order) {
 		this.order = order;
 	}
 

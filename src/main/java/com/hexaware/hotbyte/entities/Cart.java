@@ -1,6 +1,8 @@
 package com.hexaware.hotbyte.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
@@ -10,13 +12,15 @@ import jakarta.persistence.Table;
 @Table(name="cart")
 public class Cart {
 	
-	@Id	
-	private int cart_id;
+	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long cart_id;
 	
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
-	private User user;
+	private UserInfo user;
 	
 	 @OneToOne
 	 @JoinColumn(name = "restaurant_id")
@@ -24,26 +28,26 @@ public class Cart {
 	 
 	 public Cart() {}
 	
-	 public Cart(int cart_id, User user, Restaurant restaurant) {
+	 public Cart(long cart_id, UserInfo user, Restaurant restaurant) {
 		super();
 		this.cart_id = cart_id;
 		this.user = user;
 		this.restaurant = restaurant;
 	}
 
-	 public int getCart_id() {
+	 public long getCart_id() {
 		return cart_id;
 	}
 
-	public void setCart_id(int cart_id) {
+	public void setCart_id(long cart_id) {
 		this.cart_id = cart_id;
 	}
 
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 

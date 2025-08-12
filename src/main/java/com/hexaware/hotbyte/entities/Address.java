@@ -1,6 +1,8 @@
 package com.hexaware.hotbyte.entities;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -10,7 +12,9 @@ import jakarta.persistence.Table;
 @Table(name="addresses")
 public class Address {
 	
-	
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long address_id;
 	private String address_line_1;
 	private String address_line_2;
 	private String city;
@@ -20,16 +24,13 @@ public class Address {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	private User user;
-	
-	@Id
-	private int address_id;
+	private UserInfo user;
 	
 	public Address() {}
 	
 
 	public Address(String address_line_1, String address_line_2, String city, String state, String pincode, String type,
-			User user, int address_id) {
+			UserInfo user, int address_id) {
 		super();
 		this.address_line_1 = address_line_1;
 		this.address_line_2 = address_line_2;
@@ -41,7 +42,7 @@ public class Address {
 		this.address_id = address_id;
 	}
 
-	public int getAddress_id() {
+	public long getAddress_id() {
 		return address_id;
 	}
 
@@ -97,11 +98,11 @@ public class Address {
 		this.type = type;
 	}
 
-	public User getUser() {
+	public UserInfo getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserInfo user) {
 		this.user = user;
 	}
 
