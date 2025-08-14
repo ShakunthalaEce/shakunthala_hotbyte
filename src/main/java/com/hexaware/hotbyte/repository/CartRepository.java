@@ -3,9 +3,13 @@ package com.hexaware.hotbyte.repository;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.hexaware.hotbyte.entities.Cart;
 
 public interface CartRepository extends JpaRepository<Cart,Long>{
-	Optional<Cart> findByUserUserId(long userId);
+	
+	@Query("SELECT c FROM Cart c WHERE c.user.user_id = :userId")
+    Optional<Cart> findCartByUserId(@Param("userId") long userId);
 }

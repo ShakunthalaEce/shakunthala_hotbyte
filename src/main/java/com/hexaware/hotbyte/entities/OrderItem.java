@@ -1,4 +1,12 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for OrderItem
+ * Mappings
+*/
 package com.hexaware.hotbyte.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +27,7 @@ public class OrderItem {
 	
 	@ManyToOne
 	@JoinColumn(name="order_id")
+	@JsonBackReference
 	private OrderInfo order;
 	
 	@ManyToOne

@@ -1,3 +1,11 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * Menu Item Service
+ * 
+ * Responsibility:
+ * add,update,delete,get menu items
+*/
 package com.hexaware.hotbyte.service;
 
 import java.util.List;

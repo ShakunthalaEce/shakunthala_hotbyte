@@ -1,9 +1,17 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for UserInfo
+ * Mappings
+*/
 package com.hexaware.hotbyte.entities;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hexaware.hotbyte.enums.UserRole;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,16 +38,20 @@ public class UserInfo {
 	@Enumerated(EnumType.STRING)
 	private UserRole role;
 	
-	@OneToMany(mappedBy = "user")
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<Address> addresses;
 	
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Cart cart;
 	
-	@OneToOne(mappedBy="user")
+	@OneToOne(mappedBy="user",cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private Restaurant restaurant;
 	
-	@OneToMany(mappedBy="user")
+	@OneToMany(mappedBy="user",cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<OrderInfo> orders;
 	
 	public UserInfo() {}

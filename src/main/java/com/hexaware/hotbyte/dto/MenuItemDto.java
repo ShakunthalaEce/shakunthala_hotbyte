@@ -1,5 +1,14 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * menuItem Dto
+ * 
+ * Responsibility:
+ * validations
+*/
 package com.hexaware.hotbyte.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class MenuItemDto {
 	
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
     private long menu_item_id;
 
     @NotBlank(message = "Menu item name cannot be blank")
@@ -45,7 +55,8 @@ public class MenuItemDto {
     private String is_available;
 
     @NotNull(message = "Restaurant ID is required")
-    private int restaurant_id;
+    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+    private long restaurant_id;
 
     @NotNull(message = "Category ID is required")
     private long category_id;

@@ -1,13 +1,24 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for OrderInfo
+ * Mappings
+*/
 package com.hexaware.hotbyte.entities;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.hexaware.hotbyte.enums.OrderStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,7 +35,7 @@ public class OrderInfo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long order_id;
 	private double total_amount;
-	private LocalDate order_time;
+	private LocalDateTime order_time;
 	
 	
 	@Enumerated(EnumType.STRING)
@@ -32,27 +43,28 @@ public class OrderInfo {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	  @JsonBackReference
 	private UserInfo user;
 	
 	@ManyToOne
 	@JoinColumn(name="restaurant_id")
+	 @JsonBackReference 
 	private Restaurant restaurant;
 	
 	@ManyToOne
 	@JoinColumn(name = "shipping_address_id")
+	@JsonBackReference
 	private Address shippingAddress;
 	
-
-
-	
-	@OneToMany(mappedBy="order")
+	@OneToMany(mappedBy="order",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+	@JsonManagedReference
 	private List<OrderItem>orderItem;
 
 	
 	public OrderInfo() {}
 
 
-	public OrderInfo(long order_id, double total_amount, LocalDate order_time, OrderStatus status, UserInfo user,
+	public OrderInfo(long order_id, double total_amount, LocalDateTime order_time, OrderStatus status, UserInfo user,
 			Restaurant restaurant, Address shippingAddress, List<OrderItem> orderItem) {
 		super();
 		this.order_id = order_id;
@@ -96,15 +108,15 @@ public class OrderInfo {
 
 
 
-	public LocalDate getOrder_time() {
+	public LocalDateTime getOrder_time() {
 		return order_time;
 	}
 
 
 
 
-	public void setOrder_time(LocalDate order_time) {
-		this.order_time = order_time;
+	public void setOrder_time(LocalDateTime localDateTime) {
+		this.order_time = localDateTime;
 	}
 
 

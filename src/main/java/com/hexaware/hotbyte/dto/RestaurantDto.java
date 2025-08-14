@@ -1,7 +1,16 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * Restaurant Dto
+ * 
+ * Responsibility:
+ * validations
+*/
 package com.hexaware.hotbyte.dto;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -15,6 +24,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RestaurantDto {
 	
+		@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	 	private long restaurant_id;
 
 	    @NotBlank(message = "Restaurant name is required")
@@ -41,6 +51,6 @@ public class RestaurantDto {
 	    private Long userId;
 
 	    @NotNull(message = "Category IDs are required")
-	    private List<Integer> categoryIds;
+	    private List<Long> categoryIds;
 	
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import com.hexaware.hotbyte.dto.UserInfoDto;
 import com.hexaware.hotbyte.entities.UserInfo;
 
-public interface IUserService {
+public interface IUserInfoService {
 	UserInfo registerUser(UserInfoDto userInfoDto);
 
 	UserInfo updateUser(Long userId, UserInfoDto userInfoDto);

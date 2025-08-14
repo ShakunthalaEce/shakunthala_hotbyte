@@ -1,8 +1,17 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * User Info Service
+ * 
+ * Responsibility:
+ * add,update,delete,get user info
+*/
 package com.hexaware.hotbyte.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotbyte.dto.UserInfoDto;
@@ -12,18 +21,22 @@ import com.hexaware.hotbyte.exception.ResourceNotFoundException;
 import com.hexaware.hotbyte.repository.UserInfoRepository;
 
 @Service
-public class UserServiceImpl implements IUserService {
+public class UserInfoServiceImpl implements IUserInfoService {
 	
 	@Autowired
 	UserInfoRepository userInfoRepo;
 
+	@Autowired
+    private PasswordEncoder passwordEncoder;
+	
 	@Override
 	public UserInfo registerUser(UserInfoDto userInfoDto) {
 		 UserInfo user = new UserInfo();
 
 		    user.setName(userInfoDto.getName());
 		    user.setEmail(userInfoDto.getEmail());
-		    user.setPassword(userInfoDto.getPassword());
+		    user.setPassword(passwordEncoder.encode(userInfoDto.getPassword()));
+//		    user.setPassword(userInfoDto.getPassword());
 		    user.setPhone_number(userInfoDto.getPhoneNumber());
 
 		   
@@ -40,13 +53,13 @@ public class UserServiceImpl implements IUserService {
 
 	@Override
 	public UserInfo updateUser(Long userId, UserInfoDto userInfoDto) {
-	    UserInfo existingUser = userInfoRepo.findById(userId)
+	    UserInfo user = userInfoRepo.findById(userId)
 	        .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + userId));
 
-	    existingUser.setName(userInfoDto.getName());
-	    existingUser.setEmail(userInfoDto.getEmail());
-	    existingUser.setPassword(userInfoDto.getPassword());
-	    existingUser.setPhone_number(userInfoDto.getPhoneNumber());
+	    user.setName(userInfoDto.getName());
+	    user.setEmail(userInfoDto.getEmail());
+	    user.setPassword(userInfoDto.getPassword());
+	    user.setPhone_number(userInfoDto.getPhoneNumber());
 
 	    UserRole role;
 	    try {
@@ -54,9 +67,9 @@ public class UserServiceImpl implements IUserService {
 	    } catch (IllegalArgumentException e) {
 	        throw new IllegalArgumentException("Invalid role: " + userInfoDto.getRole());
 	    }
-	    existingUser.setRole(role);
+	    user.setRole(role);
 
-	    return userInfoRepo.save(existingUser);
+	    return userInfoRepo.save(user);
 	}
 
 	@Override

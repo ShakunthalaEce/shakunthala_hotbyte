@@ -1,5 +1,14 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * CartItem Dto
+ * 
+ * Responsibility:
+ * validations
+*/
 package com.hexaware.hotbyte.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -11,7 +20,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CartItemDto {
 	
-		@Min(value = 1, message = "Cart item ID must be greater than 0")
+		
+		@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	    private long cart_item_id;
 
 	    @NotNull(message = "Quantity cannot be null")
@@ -19,7 +29,7 @@ public class CartItemDto {
 	    private int quantity;
 
 	    @NotNull(message = "Cart ID cannot be null")
-	    @Min(value = 1, message = "Cart ID must be greater than 0")
+	    
 	    private long cart_id;
 
 	    @NotNull(message = "Menu Item ID cannot be null")

@@ -1,5 +1,15 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * Address Dto
+ * 
+ * Responsibility:
+ * validations
+*/
+
 package com.hexaware.hotbyte.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -11,7 +21,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor 
 @AllArgsConstructor 
 public class AddressDto {
-	 private long addressId;
+	    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+	 	private long addressId;
 
 	    @NotBlank(message = "Address line 1 cannot be empty")
 	    @Size(max = 100, message = "Address line 1 should not exceed 100 characters")
@@ -36,6 +47,7 @@ public class AddressDto {
 	    @Pattern(regexp = "^(Home|Work|Other)$", message = "Type must be Home, Work, or Other")
 	    private String type;
 
-	    private int userId;
+	    @Schema(accessMode = Schema.AccessMode.READ_ONLY)
+	    private long userId;
     
 }

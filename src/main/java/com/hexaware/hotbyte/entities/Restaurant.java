@@ -1,8 +1,16 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for Restaurant
+ * Mappings
+*/
+
 package com.hexaware.hotbyte.entities;
-
-
-
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,13 +36,17 @@ public class Restaurant {
 	
 	@OneToOne
 	@JoinColumn(name="user_id")
+	@JsonBackReference
 	private UserInfo user;
 	
 	
 	@OneToMany(mappedBy="restaurant")
+	@JsonManagedReference
 	private List<MenuItem> menuItems;
 	
 	@OneToMany(mappedBy="restaurant")
+	@JsonIgnore
+	@JsonManagedReference
 	private List<OrderInfo>orders;
 	
 	 @ManyToMany
@@ -43,6 +55,8 @@ public class Restaurant {
 	 joinColumns = @JoinColumn(name = "restaurant_id"),
 	 inverseJoinColumns = @JoinColumn(name = "category_id")
 	 )
+	 @JsonManagedReference
+	 @JsonIgnore
 	 private List<Category> categories;
 	 
 	 public Restaurant() {}

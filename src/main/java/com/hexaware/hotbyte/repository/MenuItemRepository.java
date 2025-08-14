@@ -12,9 +12,10 @@ import com.hexaware.hotbyte.entities.MenuItem;
 import com.hexaware.hotbyte.entities.Restaurant;
 
 public interface MenuItemRepository extends JpaRepository<MenuItem, Long> {
-	Optional<CartItem> findByCartAndMenuItem(Cart cart, MenuItem menuItem);
+	
 
 	List<MenuItem> findByCategory(Category category);
 
 	List<MenuItem> findByRestaurant(Restaurant restaurant);
+	
 }

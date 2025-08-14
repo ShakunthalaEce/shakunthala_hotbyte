@@ -1,3 +1,11 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * Restaurant Service
+ * 
+ * Responsibility:
+ * add,update,delete,get restaurant
+*/
 package com.hexaware.hotbyte.service;
 
 import java.util.List;
@@ -6,9 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.hexaware.hotbyte.dto.RestaurantDto;
+import com.hexaware.hotbyte.entities.Category;
 import com.hexaware.hotbyte.entities.Restaurant;
 import com.hexaware.hotbyte.entities.UserInfo;
 import com.hexaware.hotbyte.exception.ResourceNotFoundException;
+import com.hexaware.hotbyte.repository.CategoryRepository;
 import com.hexaware.hotbyte.repository.RestaurantRepository;
 import com.hexaware.hotbyte.repository.UserInfoRepository;
 
@@ -20,6 +30,9 @@ public class RestaurantServiceImpl implements IRestaurantService {
 	
 	@Autowired
 	UserInfoRepository userInfoRepo;
+	
+	@Autowired
+	CategoryRepository categoryRepo;
 
 	@Override
 	public Restaurant createRestaurant(RestaurantDto restaurantDto) {
@@ -30,6 +43,10 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		    restaurant.setCity(restaurantDto.getCity());
 		    restaurant.setState(restaurantDto.getState());
 		    restaurant.setPincode(restaurantDto.getPincode());
+		    if (restaurantDto.getCategoryIds() != null && !restaurantDto.getCategoryIds().isEmpty()) {
+		        List<Category> categories = categoryRepo.findAllById(restaurantDto.getCategoryIds());
+		        restaurant.setCategories(categories);
+		    }
 		    
 		   
 		    UserInfo user = userInfoRepo.findById(restaurantDto.getUserId())
@@ -56,6 +73,11 @@ public class RestaurantServiceImpl implements IRestaurantService {
 		                .orElseThrow(() -> new ResourceNotFoundException("User not found with id: " + restaurantDto.getUserId()));
 		        restaurant.setUser(user);
 		    }
+		    
+		    if (restaurantDto.getCategoryIds() != null && !restaurantDto.getCategoryIds().isEmpty()) {
+		        List<Category> categories = categoryRepo.findAllById(restaurantDto.getCategoryIds());
+		        restaurant.setCategories(categories);
+		    } 
 
 		    return restaurantRepo.save(restaurant);
 	}

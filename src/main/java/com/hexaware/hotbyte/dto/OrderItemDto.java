@@ -1,5 +1,14 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * OrderItem Dto
+ * 
+ * Responsibility:
+ * validations
+*/
 package com.hexaware.hotbyte.dto;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -10,6 +19,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderItemDto {
+	
+	@Schema(accessMode = Schema.AccessMode.READ_ONLY)
 	private long order_item_id; 
 
     @NotNull(message = "Quantity cannot be null")
@@ -20,8 +31,8 @@ public class OrderItemDto {
     private Double price;
 
     @NotNull(message = "Order ID is required")
-    private Integer orderId;
+    private long orderId;
 
     @NotNull(message = "Menu item ID is required")
-    private Integer menuItemId;
+    private long menuItemId;
 }

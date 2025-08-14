@@ -1,3 +1,11 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * Category Service
+ * 
+ * Responsibility:
+ * add,update,delete,get category
+*/
 package com.hexaware.hotbyte.service;
 
 import java.util.List;
@@ -21,7 +29,7 @@ public class CategoryServiceImpl implements ICategoryService {
 		Category category = new Category();
 		category.setCategory_id(categoryDto.getCategory_id());
 		category.setName(categoryDto.getName());
-		category.setDescription(category.getDescription());
+		category.setDescription(categoryDto.getDescription());
 		
 		return repo.save(category);
 		
@@ -32,7 +40,7 @@ public class CategoryServiceImpl implements ICategoryService {
 		Category category = new Category();
 		category.setCategory_id(categoryDto.getCategory_id());
 		category.setName(categoryDto.getName());
-		category.setDescription(category.getDescription());
+		category.setDescription(categoryDto.getDescription());
 		
 		return repo.save(category);
 	}
@@ -50,5 +58,9 @@ public class CategoryServiceImpl implements ICategoryService {
 	public List<Category> getAllCategories() {
 		return repo.findAll();
 	}
+	
+	public List<Category> getCategoriesByIds(List<Long> categoryIds) {
+        return repo.findAllById(categoryIds);
+    }
 
 }

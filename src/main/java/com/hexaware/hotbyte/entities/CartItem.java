@@ -1,4 +1,12 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for CartItem
+ * Mappings
+*/
 package com.hexaware.hotbyte.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -16,10 +24,12 @@ public class CartItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "cart_id")
+	@JsonBackReference
 	private Cart cart;
 
 	@ManyToOne
 	@JoinColumn(name = "menu_item_id")
+	@JsonBackReference
 	private MenuItem menuItem;
 	
 	public CartItem() {}

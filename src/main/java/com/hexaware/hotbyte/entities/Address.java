@@ -1,4 +1,13 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for Address
+ * Mappings
+*/
+
 package com.hexaware.hotbyte.entities;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,13 +33,14 @@ public class Address {
 	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
+	@JsonBackReference
 	private UserInfo user;
 	
 	public Address() {}
 	
 
-	public Address(String address_line_1, String address_line_2, String city, String state, String pincode, String type,
-			UserInfo user, int address_id) {
+	public Address(long address_id,String address_line_1, String address_line_2, String city, String state, String pincode, String type,
+			UserInfo user) {
 		super();
 		this.address_line_1 = address_line_1;
 		this.address_line_2 = address_line_2;
@@ -46,7 +56,7 @@ public class Address {
 		return address_id;
 	}
 
-	public void setAddress_id(int address_id) {
+	public void setAddress_id(long address_id) {
 		this.address_id = address_id;
 	}
 

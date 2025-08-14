@@ -1,3 +1,11 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:13/8/25
+ * Order Item Service
+ * 
+ * Responsibility:
+ * get order items
+*/
 package com.hexaware.hotbyte.service;
 
 import java.util.List;
@@ -22,7 +30,7 @@ public class OrderItemServiceImpl implements IOrderItemService{
 
 	@Override
 	public List<OrderItem> getOrderItemsByOrder(Long orderId) {
-		 return orderItemRepo.findByOrderOrderId(orderId);
+		 return orderItemRepo.findOrderItemsByOrderId(orderId);
 	}
 
 }

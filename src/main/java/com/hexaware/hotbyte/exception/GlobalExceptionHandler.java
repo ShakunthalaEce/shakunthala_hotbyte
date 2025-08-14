@@ -1,3 +1,11 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:12/8/25
+ * Global Excepiton Handler
+ * 
+ * Responsibility:
+ * Handle Exceptions
+*/
 package com.hexaware.hotbyte.exception;
 
 import org.springframework.http.HttpStatus;

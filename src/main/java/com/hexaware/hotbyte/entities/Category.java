@@ -1,6 +1,15 @@
+/*
+ * Author: Shakunthala
+ * Last Modified:7/8/25
+ * Entity class for Category
+ * Mappings
+*/
 package com.hexaware.hotbyte.entities;
 
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,9 +28,11 @@ public class Category {
 	private String description;
 	
 	@OneToMany(mappedBy="category")
+	@JsonManagedReference
 	List<MenuItem>menuItems;
 	
 	@ManyToMany(mappedBy = "categories")
+	@JsonBackReference
     private List<Restaurant> restaurants;
 	
 	
